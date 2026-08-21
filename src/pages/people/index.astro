@@ -1,0 +1,33 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+// Components
+import PeopleCard from "@/components/people/PeopleCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPeople = (await getCollection("people")).sort(
+  (a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)
+);
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <Text
+        tag="h1"
+        variant="displayLG"
+        class="text-base-900 font-serif font-light leading-snug tracking-tight"
+      >
+        Our Wedding Party
+      </Text>
+      <Text tag="p" variant="textBase" class="text-base-600 mt-2">
+        Meet the wonderful people standing alongside us.
+      </Text>
+      <div class="mt-12 lg:mt-24 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {allPeople.map((person) => <PeopleCard person={person} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

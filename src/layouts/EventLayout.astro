@@ -1,0 +1,164 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import info from "@/images/assets/info.png";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import EventCard from "@/components/events/EventCard.astro";
+const { frontmatter, item } = Astro.props;
+// Get related events
+import { getCollection } from "astro:content";
+const allEvents = await getCollection("events");
+const relatedEvents = allEvents
+  .filter((e) => e.slug !== item.slug)
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .slice(0, 3);
+// Format time display
+const formatTime = (time: string) => {
+  if (!time) return "";
+  const [hours, minutes] = time.split(":");
+  const hour = parseInt(hours);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const displayHour = hour % 12 || 12;
+  return `${displayHour}:${minutes} ${ampm}`;
+};
+const timeRange = frontmatter.startTime
+  ? frontmatter.endTime
+    ? `${formatTime(frontmatter.startTime)} - ${formatTime(frontmatter.endTime)}`
+    : formatTime(frontmatter.startTime)
+  : "";
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="wide" class="pt-24 lg:pt-32">
+      <Image
+        src={info}
+        alt="info"
+        width="1440"
+        height="1193"
+        loading="eager"
+        decoding="async"
+        class="w-full max-h-100 object-cover object-center saturate-50"
+      />
+    </Wrapper>
+    <Wrapper variant="wide" class="py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+        <div>
+          <div class="lg:sticky lg:top-32">
+            <Text
+              tag="h1"
+              variant="displaySM"
+              class="text-base-900 font-serif font-light leading-snug tracking-tight"
+            >
+              Event Details
+            </Text>
+            <div class="space-y-4 mt-8 pt-8 border-t border-base-200">
+              <div>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-900 font-medium"
+                >
+                  Date
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                  {
+                    frontmatter.date.toLocaleDateString("en-US", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  }
+                </Text>
+              </div>
+              <div>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-900 font-medium"
+                >
+                  Time
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                  {timeRange}
+                </Text>
+              </div>
+              <div>
+                <Text
+                  tag="p"
+                  variant="textSM"
+                  class="text-base-900 font-medium"
+                >
+                  Location
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                  See venue details on the
+                  <a
+                    href="/info"
+                    class="text-accent-600 hover:text-accent-700 underline"
+                  >
+                    Info page
+                  </a>
+                </Text>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3">
+          <Text
+            tag="h1"
+            variant="displayXL"
+            class="text-base-900 font-display italic font-light leading-tight"
+          >
+            {frontmatter.title}
+          </Text>
+         
+          <Text
+            tag="p"
+            variant="textLG"
+            class="text-base-700 mt-4 text-balance"
+          >
+            {frontmatter.description}
+          </Text>
+          <Wrapper variant="prose" class="mt-12 border-t border-base-200 pt-12">
+            <slot />
+          </Wrapper>
+        </div>
+        <div>
+          <div class="lg:sticky lg:top-32">
+            <Text
+              tag="h1"
+              variant="displaySM"
+              class="text-base-900 font-serif font-light leading-snug tracking-tight"
+            >
+              Other events
+            </Text>
+            <div class="space-y-1 mt-8 pt-8 border-t border-base-200">
+              {
+                allEvents
+                  .filter((e) => e.slug !== item.slug)
+                  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+                  .map((event) => (
+                    <div>
+                     
+                        <a
+                          href={`/events/${event.slug}`}
+                          class="text-base-900 hover:text-accent-600 underline font-mediumm text-sm"
+                        >
+                          {event.data.title}
+                        </a>
+                    </div>
+                  ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

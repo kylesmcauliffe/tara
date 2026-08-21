@@ -1,0 +1,34 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const storyParagraphs = [
+  `They met in 2018 when a rainstorm forced everyone at a neighborhood coffee shop to linger far longer than planned. Daniel cracked a joke about the playlist, Emily corrected his trivia, and the rest of the day disappeared into refills and unfolding stories. Since then they've collected tiny rituals—Sunday pancakes, unplanned road trips, and voice notes that always end with "call me when you're free"—signposts that reminded them to keep building a life on purpose.`,
+  `Their weeknights are a collage of shared calendars, half-finished books swapped on the sofa, and playlists they build in the Notes app because they never want to forget what song soundtracked a certain day. They fall asleep talking about the trips they still want to take, the people they want to host, and the kind of home that feels like a revolving door for friends who need a soft place to land.`,
+  `The wedding isn't just a ceremony; it's the next chapter of something they've been writing together for years. They want every guest to feel like they're part of the story, from first toast to last song. Bring your best advice, your wildest dance moves, and the willingness to stay late—the night is meant to feel like the moment you realize you're home.`,
+  `After the vows they'll probably sneak away for five quiet minutes, just to take a breath and memorize the volume of the room. Then they'll be back on the dance floor, laughing at the off-beat claps, hugging every aunt, and soaking up the fact that their story is forever tied to the people who showed up ready to celebrate.`,
+];
+---
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <Text
+      tag="h2"
+      variant="displayLG"
+      class="text-base-900 font-serif font-light leading-snug tracking-tight"
+    >
+      Two people, one story — held together by coffee dates, late-night
+      playlists, and a shared love of turning quiet moments into loud memories.
+    </Text>
+    <div
+      class="mt-12  columns-1 space-y-4 lg:columns-2 lg:space-y-8 lg:space-x-8"
+    >
+      {
+        storyParagraphs.map((paragraph) => (
+          <Text tag="p" variant="textBase" class="text-base-700">
+            {paragraph}
+          </Text>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

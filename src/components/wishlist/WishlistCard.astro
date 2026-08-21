@@ -1,0 +1,42 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+// Assets
+import { Image } from "astro:assets";
+// Content
+const { title, description, url, image } = {
+  url: "/wishlist/" + Astro.props.wishlist.slug,
+  title: Astro.props.wishlist.data.title,
+  description: Astro.props.wishlist.data.description,
+  image: Astro.props.wishlist.data.image?.url,
+};
+---
+
+<article class="relative flex flex-col">
+  <a
+    href={url}
+    title={`View item: ${title}`}
+    aria-label={`View item: ${title}`}
+    class="absolute inset-0 z-10"></a>
+  <Image
+    src={image}
+    alt={title}
+    width={800}
+    height={800}
+    loading="eager"
+    decoding="async"
+    class="aspect-square lg:aspect-9/12 object-cover object-top saturate-50"
+  />
+  <div class="mt-4">
+    <Text
+      tag="h3"
+      variant="textXL"
+      class="font-medium text-base-900 font-serif"
+    >
+      {title}
+    </Text>
+    <Text tag="p" variant="textBase" class="text-base-600 mt-2">
+      {description}
+    </Text>
+  </div>
+</article>

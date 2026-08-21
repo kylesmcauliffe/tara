@@ -1,0 +1,114 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Navigation links array
+const navLinks = [
+  { href: "/rsvp", label: "RSVP" },
+  { href: "/info", label: "Info" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/people", label: "People" },
+  { href: "/events", label: "Events" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/wishlist", label: "Wishlist" },
+  { href: "/blog", label: "Journal" },
+  { href: "/system/overview", label: "Overview" },
+  {
+    href: "https://lexingtonthemes.com/templates/northbound",
+    label: "Buy",
+  },
+];
+const leftLinks = navLinks.slice(0, 5);
+const rightLinks = navLinks.slice(5);
+---
+
+<header class="fixed w-full top-0 z-50 bg-base-50 py-2 lg:py-8">
+  <Wrapper variant="wide">
+    <!-- Desktop Navigation -->
+    <nav
+      class="grid grid-cols-2 lg:grid-cols-3 lg:col-span-3 text-black items-center"
+    >
+      <div class="hidden lg:flex items-center gap-4 mr-auto">
+        {
+          leftLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-center justify-center text-sm  transition-colors uppercase"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+      <a href="/" class="lg:text-center lg:justify-center">
+        <span class="sr-only"> Go home</span>
+        <Logo
+          class="text-2xl lg:text-6xl font-medium tracking-tight font-display uppercase focus:outline-none text-black"
+        />
+      </a>
+      <div class="hidden lg:flex items-center gap-4 ml-auto">
+        {
+          rightLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-center justify-center text-sm  transition-colors uppercase"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+      <div class="lg:hidden ml-auto">
+        <button
+          id="mobile-menu-toggle"
+          class="text-2xl font-medium tracking-tight font-display uppercase focus:outline-none text-black"
+          aria-label="Toggle menu"
+        >
+          Menu
+        </button>
+      </div>
+    </nav>
+  </Wrapper>
+</header>
+
+<!-- Mobile Navigation rendered outside header to avoid blend effects -->
+<nav
+  id="mobile-menu"
+  class="hidden lg:hidden fixed inset-x-0 z-40"
+  style="top: 0px"
+>
+  <Wrapper variant="standard">
+    <div class="bg-base-50 h-full py-4 flex flex-col gap-4">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-3xl font-medium tracking-tight font-display uppercase focus:outline-none text-black"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </Wrapper>
+</nav>
+
+<script>
+  const menuToggle = document.getElementById("mobile-menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const headerEl = document.querySelector("header");
+
+  function positionMobileMenu() {
+    if (!mobileMenu || !headerEl) return;
+    const h = headerEl.getBoundingClientRect().height;
+    mobileMenu.style.top = `${h}px`;
+  }
+
+  // Set initial position and update on resize
+  positionMobileMenu();
+  window.addEventListener("resize", positionMobileMenu);
+  menuToggle?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+</script>

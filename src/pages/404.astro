@@ -1,0 +1,55 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import intro from "@/images/assets/intro.png";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+<BaseLayout hideNavigation={true} hideFooter={true}>
+  <section>
+    <Wrapper variant="wide" class="py-8">
+      <div class="relative overflow-hidden h-[calc(100dvh-4rem)]">
+        <Image
+          src={intro}
+          alt="intro"
+          width="1440"
+          height="1193"
+          loading="eager"
+          decoding="async"
+          class="size-full object-cover object-top saturate-50"
+        />
+        <!-- Overlay with title and subtitle -->
+        <div
+          class="absolute inset-0 flex flex-col items-center text-center justify-center bg-black/30"
+        >
+          <Text
+            tag="h1"
+            variant="display4XL"
+            class="font-display text-white uppercase"
+          >
+            404
+          </Text>
+          <div class="mt-10 flex flex-col sm:flex-row gap-8 lg:gap-12">
+            <a
+              href="/"
+              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white ml-auto flex"
+              >Home</a
+            >
+            <a
+              href="/events"
+              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white ml-auto flex"
+              >Events</a
+            >
+            <a
+              href="/people"
+              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white ml-auto flex"
+              >People</a
+            >
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

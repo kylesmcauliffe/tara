@@ -1,0 +1,43 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import heroimage from "@/images/assets/heroimage.png";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Get content collections
+import { getCollection } from "astro:content";
+const people = await getCollection("people");
+const bride = people.find((p) => p.data.role.toLowerCase().includes("bride"));
+const groom = people.find((p) => p.data.role.toLowerCase().includes("groom"));
+---
+
+<section>
+  <Wrapper variant="wide" class="py-24 lg:py-32">
+    <div class="relative overflow-hidden h-[calc(100dvh-4rem)]">
+      <Image
+        src={heroimage}
+        alt="heroimage"
+        width="1440"
+        height="1193"
+        loading="eager"
+        decoding="async"
+        class="size-full object-cover object-top saturate-50"
+      />
+      <!-- Overlay with title and subtitle -->
+      <div
+        class="absolute inset-0 flex flex-col pt-42 items-center text-center justify-center bg-black/30"
+      >
+        <Text
+          tag="h1"
+          variant="display4XL"
+          class="font-display text-white uppercase"
+        >
+          {bride?.data.name.split(" ")[0] || "Bride"} & {
+            groom?.data.name.split(" ")[0] || "Groom"
+          }
+        </Text>
+      </div>
+    </div>
+  </Wrapper>
+</section>

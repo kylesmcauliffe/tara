@@ -1,0 +1,37 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import BlogCard from "@/components/blog/BlogCard.astro";
+import BigBlogCard from "@/components/blog/BigBlogCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+allPosts.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getTime(); // Convert to timestamp
+  const dateB = new Date(b.data.pubDate).getTime(); // Convert to timestamp
+  return dateB - dateA; // Compare timestamps
+});
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <Text
+        tag="h2"
+        variant="display4XL"
+        class="text-base-900 font-serif font-light leading-snug tracking-tight"
+      >
+        The Journal
+      </Text>
+      <div class="mt-12 pt-12 border-t border-base-200">
+        {allPosts.slice(0, 1).map((post) => <BigBlogCard post={post} />)}
+      </div>
+      <div class="mt-12 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3 gap-y-12">
+        {allPosts.slice(1).map((post) => <BlogCard post={post} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

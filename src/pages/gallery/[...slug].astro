@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from "astro:content";
+import GalleryLayout from "@/layouts/GalleryLayout.astro";
+export async function getStaticPaths() {
+  const gallery = await getCollection("gallery");
+  const paths = gallery.map((page) => {
+    return {
+      params: { slug: page.slug },
+      props: { page },
+      trailingSlash: false,
+    };
+  });
+  return paths;
+}
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<GalleryLayout frontmatter={page.data} item={page}>
+  <Content />
+</GalleryLayout>

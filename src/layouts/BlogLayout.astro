@@ -1,0 +1,132 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Sections
+import BlogCard from "@/components/blog/BlogCard.astro";
+const { frontmatter } = Astro.props;
+
+// Get all posts and filter by tag
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+const relatedPosts = allPosts.filter((post) =>
+  post.data.tags.some((tag) => frontmatter.tags.includes(tag))
+);
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <Text
+        tag="h1"
+        variant="display2XL"
+        class="text-base-900 font-serif font-light leading-snug tracking-tight"
+      >
+        {frontmatter.title}
+      </Text>
+
+      <Text tag="p" variant="textLG" class="texr-base-600 mt-4">
+        {frontmatter.description}
+      </Text>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12 lg:mt-24">
+        <div>
+          <div class="lg:sticky lg:top-32 lg:text-balance space-y-6">
+            <div class="pb-6 border-b border-base-200">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-500 uppercase tracking-wider font-medium mb-2"
+              >
+                Published
+              </Text>
+              <Text tag="p" variant="textSM" class="text-base-900 font-medium">
+                <time datetime={new Date(frontmatter.pubDate).toISOString()}>
+                  {
+                    new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "2-digit",
+                    })
+                  }
+                </time>
+              </Text>
+            </div>
+
+            <div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-500 uppercase tracking-wider font-medium mb-2"
+              >
+                About this post
+              </Text>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-700 leading-relaxed"
+              >
+                {frontmatter.description}
+              </Text>
+            </div>
+
+            {
+              frontmatter.tags && frontmatter.tags.length > 0 && (
+                <div>
+                  <Text
+                    tag="p"
+                    variant="textXS"
+                    class="text-base-500 uppercase tracking-wider font-medium mb-3"
+                  >
+                    Tags
+                  </Text>
+                  <div class="flex flex-col  gap-2">
+                    {frontmatter.tags.map((tag) => (
+                      <a
+                        href={`/blog/tags/${tag}`}
+                        class="text-base-900 capitalize hover:text-base-600 duration-300"
+                      >
+                        {tag}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <Image
+            width={1400}
+            height={1400}
+            src={frontmatter.image.url}
+            alt={frontmatter.image.alt}
+          />
+          <Wrapper variant="prose"><slot /></Wrapper>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+  {
+    relatedPosts.length > 0 && (
+      <section>
+        <Wrapper variant="standard" class="py-24 lg:py-32">
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="text-base-900 font-serif font-light leading-snug tracking-tight"
+          >
+            Related posts
+          </Text>
+          <div class="mt-12 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3 gap-y-12">
+            {relatedPosts.slice(0, 3).map((post) => (
+              <BlogCard post={post} />
+            ))}
+          </div>
+        </Wrapper>
+      </section>
+    )
+  }
+</BaseLayout>

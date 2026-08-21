@@ -1,0 +1,182 @@
+---
+// Assets
+import Symbol from "@/components/assets/Symbol.astro";
+import { Image } from "astro:assets";
+import intro4 from "@/images/assets/intro4.png";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="wide" class="py-24 lg:py-32">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <Image
+          src={intro4}
+          alt="image"
+          width="1440"
+          height="1193"
+          loading="eager"
+          decoding="async"
+          class="aspect-square lg:aspect-9/12 object-cover object-top saturate-50 lg:h-full"
+        />
+        <div class="p-8 lg:p-12 bg-accent-950">
+          <Symbol class="size-24 z-10 text-white" />
+          <Text
+            tag="h1"
+            variant="displayLG"
+            class="text-base-50 mt-8 font-serif font-light leading-snug tracking-tight"
+            >RSVP</Text
+          >
+          <Text tag="p" variant="textBase" class="text-base-300 mt-2"
+            >Please let us know if you’ll be able to join us. Your presence
+            means the world to us as we celebrate this special milestone in our
+            lives. We can't wait to share this joyful day with our loved ones!</Text
+          >
+
+          <form method="post" class="space-y-8 mt-12">
+            <div class="space-y-1">
+              <label
+                for="name"
+                class="text-base-300 font-light text-base font-serif italic"
+              >
+                Full name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="w-full border-b border-transparent border-b-accent-800 text-base-400 pb-2 bg-transparent focus:outline-none focus:border-accent-800 focus:ring-0"
+              />
+            </div>
+
+            <div class="space-y-1">
+              <label
+                for="email"
+                class="text-base-300 font-light text-base font-serif italic"
+              >
+                Email (optional)
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                class="w-full border-b border-transparent border-b-accent-800 text-base-400 pb-2 bg-transparent focus:outline-none focus:border-accent-800 focus:ring-0"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <span class="text-base-300 font-light text-base font-serif italic"
+                >Will you be attending?</span
+              >
+              <div class="flex gap-4 mt-6">
+                <label
+                  class="inline-flex items-center gap-2 text-base-300 text-sm"
+                >
+                  <input
+                    type="radio"
+                    name="attending"
+                    value="yes"
+                    required
+                    class="text-accent-500"
+                  />
+                  <span>Yes, I’ll be there</span>
+                </label>
+                <label
+                  class="inline-flex items-center gap-2 text-base-300 text-sm"
+                >
+                  <input
+                    type="radio"
+                    name="attending"
+                    value="no"
+                    required
+                    class="text-accent-500"
+                  />
+                  <span>Sorry, I can’t make it</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label
+                for="guests"
+                class="text-base-300 font-light text-base font-serif italic"
+              >
+                Number of guests (including you)
+              </label>
+              <input
+                id="guests"
+                name="guests"
+                type="number"
+                min="1"
+                class="w-full border-b border-transparent border-b-accent-800 text-base-400 pb-2 bg-transparent focus:outline-none focus:border-accent-800 focus:ring-0"
+              />
+            </div>
+
+            <div class="space-y-1">
+              <label
+                for="dietary"
+                class="text-base-300 font-light text-base font-serif italic"
+              >
+                Dietary requirements
+              </label>
+              <textarea
+                id="dietary"
+                name="dietary"
+                rows={3}
+                class="w-full border-b border-transparent border-b-accent-800 text-base-400 pb-2 bg-transparent focus:outline-none focus:border-accent-800 focus:ring-0"
+              ></textarea>
+            </div>
+
+            <div class="space-y-1">
+              <label
+                for="message"
+                class="text-base-300 font-light text-base font-serif italic"
+              >
+                Message to the couple (optional)
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={3}
+                class="w-full border-b border-transparent border-b-accent-800 text-base-400 pb-2 bg-transparent focus:outline-none focus:border-accent-800 focus:ring-0"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white ml-auto flex"
+            >
+              Send RSVP
+            </button>
+          </form>
+        </div>
+      </div>
+      <div
+        class="mt-8 space-y-2 text-center mt-24 lg:mt-32 text-balance mx-auto"
+      >
+        <Text
+          tag="h2"
+          variant="display4XL"
+          class="text-base-900 font-serif font-light leading-snug tracking-tight"
+        >
+          Please RSVP by <span class="font-light italic">May 15, 2025</span>.
+        </Text>
+        <div class="mt-4 max-w-lg space-y-4 mx-auto">
+          <Text tag="p" variant="textLG" class="text-base-600">
+            If your plans change, just reply to our invite email or contact us
+            at <span class="underline">hello@example.com</span>.
+          </Text>
+          <Text tag="p" variant="textLG" class="text-base-600">
+            Need details about venues, parking, or dress code?
+
+            <a href="/info" class="underline"> Visit the info page </a>.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

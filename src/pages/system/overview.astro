@@ -1,0 +1,132 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const pageSections = [
+  {
+    title: "Main Pages",
+    columns: [
+      {
+        category: "Static Pages",
+        links: [
+          { text: "Home", href: "/" },
+          { text: "FAQ", href: "/faq" },
+          { text: "Info", href: "/info" },
+          { text: "404", href: "/404" },
+          { text: "RSVP", href: "/rsvp" },
+          { text: "Locations", href: "/locations" },
+        ],
+      },
+      {
+        category: "System",
+        links: [
+          { text: "Colors", href: "/system/colors" },
+          { text: "Links", href: "/system/link" },
+          { text: "Buttons", href: "/system/buttons" },
+          { text: "Typography", href: "/system/typography" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Content Collections",
+    columns: [
+      {
+        category: "Wishlist",
+        links: [
+          { text: "Home", href: "/wishlist/" },
+          { text: "Details", href: "/wishlist/cookware-set" },
+        ],
+      },
+      {
+        category: "People",
+        links: [
+          { text: "Home", href: "/people/" },
+          { text: "Details", href: "/people/bride" },
+        ],
+      },
+      {
+        category: "Gallery",
+        links: [
+          { text: "Home", href: "/gallery/" },
+          { text: "Details", href: "/gallery/reception" },
+        ],
+      },
+      {
+        category: "Events",
+        links: [
+          { text: "Home", href: "/events/" },
+          { text: "Details", href: "/events/ceremony" },
+        ],
+      },
+      {
+        category: "Journal",
+        links: [
+          { text: "Home", href: "/blog/" },
+          { text: "Details", href: "/blog/posts/1" },
+          { text: "Tag Index", href: "/blog/tags" },
+          { text: "Tag Category", href: "/blog/tags/wedding" },
+          { text: "RSS Feed", href: "/rss.xml" },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <Text
+        tag="h1"
+        variant="displayLG"
+        class="text-base-900 font-serif font-light leading-snug tracking-tight"
+      >
+        Overview
+      </Text>
+      <div class="flex flex-col mt-12 gap-24">
+        {
+          pageSections.map((section) => (
+            <div>
+              <Text
+                tag="h3"
+                variant="textXL"
+                class="font-medium font-serif font-light text-base-900"
+              >
+                {section.title}
+              </Text>
+              <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 xl:grid-cols-5">
+                {section.columns.map((column) => (
+                  <div>
+                    <Text
+                      tag="p"
+                      variant="textBase"
+                      class="font-medium text-base-900"
+                    >
+                      {column.category}
+                    </Text>
+                    <ul role="list" class="mt-2 ">
+                      {column.links.map((link) => (
+                        <li>
+                          <Text
+                            tag="a"
+                            variant="textSM"
+                            href={link.href}
+                            class="text-base-500 hover:text-base-900 duration-300"
+                          >
+                            {link.text}
+                          </Text>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

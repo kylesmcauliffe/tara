@@ -1,0 +1,38 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+// Content
+const { title, description, url, image } = {
+  url: "/blog/posts/" + Astro.props.post.slug,
+  title: Astro.props.post.data.title,
+  description: Astro.props.post.data.description,
+  image: Astro.props.post.data.image.url,
+};
+---
+
+<article class="relative grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-12 items-center">
+  <a
+    href={url}
+    title={`Read more: ${title}`}
+    aria-label={`Read blog post: ${title}`}
+    class="absolute inset-0 z-10"></a>
+  <Image
+    src={image}
+    alt={title}
+    width={800}
+    height={800}
+    loading="eager"
+    decoding="async"
+    class="aspect-square lg:aspect-12/8 object-cover object-top saturate-50 lg:col-span-2"
+  />
+  <div>
+    <Text tag="h3" variant="displaySM" class="text-base-900 font-serif leading-snug"
+      >{title}</Text
+    >
+    <Text tag="p" variant="textLG" class="text-base-600 mt-2 lg:mt-8"
+      >{description}</Text
+    >
+  </div>
+</article>

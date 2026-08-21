@@ -1,0 +1,94 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import wishlist from "@/images/assets/wishlist.png";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import WishlistCard from "@/components/wishlist/WishlistCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allWishlist = (await getCollection("wishlist")).sort((a, b) =>
+  (a.data.title || "").localeCompare(b.data.title || "")
+);
+// Group wishlist items by category
+const grouped = allWishlist.reduce((acc, item) => {
+  const cat = item.data.category || "Other";
+  if (!acc[cat]) acc[cat] = [];
+  acc[cat].push(item);
+  return acc;
+}, {});
+// Ordered list of categories (overrideable)
+const categoryOrder = ["Experiences", "Kitchen", "Home", "Bedroom"];
+// finalCategories: include items from categoryOrder plus any additional categories
+const finalCategories = [
+  ...categoryOrder,
+  ...Array.from(
+    new Set(allWishlist.map((i) => i.data.category || "Other"))
+  ).filter((c) => !categoryOrder.includes(c)),
+];
+---
+<BaseLayout>
+  <section>
+    <Wrapper variant="wide" class="py-12 lg:py-24">
+      <div class="relative overflow-hidden h-[calc(100dvh-4rem)]">
+        <Image
+          src={wishlist}
+          alt="wishlist"
+          width="1440"
+          height="1193"
+          loading="eager"
+          decoding="async"
+          class="size-full object-cover object-top saturate-50"
+        />
+        <div
+          class="absolute inset-0 flex flex-col pt-42 items-center text-center justify-center bg-black/30"
+        >
+          <Text
+            tag="h1"
+            variant="display4XL"
+            class="font-display text-white uppercase"
+          >
+            wishlist
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <Text
+        tag="h2"
+        variant="displayLG"
+        class="text-base-900 font-serif font-light leading-snug tracking-tight"
+      >
+        Help us celebrate our special day by contributing to our wishlist. Your
+        thoughtful gifts will help us build our new home together.
+      </Text>
+      <div class="space-24 lg:space-y-32 mt-12 lg:mt-24">
+        {
+          finalCategories.map((category) => (
+            <div class="grid grid-cols-1 lg:grid-cols-3">
+              <div class="">
+                <Text
+                  tag="h2"
+                  variant="displayMD"
+                  class="font-serif text-base-900 lg:sticky lg:top-32"
+                >
+                  {category}
+                </Text>
+              </div>
+              <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 lg:col-span-2">
+                {(grouped[category] || []).map((item) => (
+                  <WishlistCard wishlist={item} />
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>
