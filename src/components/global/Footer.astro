@@ -1,47 +1,102 @@
 ---
-// Assets
-import { Image } from "astro:assets";
-import intro5 from "@/images/assets/intro5.png";
-// Assets
-import Symbol from "@/components/assets/Symbol.astro";
-import { getCollection } from "astro:content";
-
-const people = await getCollection("people");
-const bride = people.find((p) => p.data.role.toLowerCase().includes("bride"));
-const groom = people.find((p) => p.data.role.toLowerCase().includes("groom"));
-// Fundations
-import Text from "@/components/fundations/elements/Text.astro";
+import Logo from "@/components/assets/Logo.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const columns = [
+  {
+    title: "Help",
+    links: [
+      { label: "Contact Us", href: "/contact" },
+      { label: "Shipping & Returns", href: "/returns" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Assistance", href: "/assistance" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "Our Story", href: "/collections" },
+      { label: "Our Shops", href: "/shops" },
+      { label: "Journal", href: "/journal" },
+      { label: "Gift Cards", href: "/gift-cards" },
+    ],
+  },
+  {
+    title: "Visit",
+    links: [
+      { label: "Los Angeles", href: "/shops/los-angeles" },
+      { label: "Marin", href: "/shops/marin" },
+      { label: "Newport", href: "/shops/newport" },
+      { label: "Track Order", href: "/track-order" },
+    ],
+  },
+];
 ---
 
-<footer>
-  <Wrapper variant="wide" class="py-12 ">
-    <div class="relative overflow-hidden h-[calc(100dvh-4rem)]">
-      <Image
-        src={intro5}
-        alt="intro5"
-        width="1440"
-        height="1193"
-        loading="eager"
-        decoding="async"
-        class="size-full object-cover object-top saturate-50"
-      />
-      <!-- Overlay with title and subtitle -->
-      <div
-        class="absolute inset-0 flex flex-col pt-42 items-center text-center justify-center bg-black/30"
+<footer class="mt-auto border-t border-taupe bg-cream">
+  <Wrapper variant="wide" class="py-16 lg:py-20">
+    <div class="max-w-md mx-auto text-center tara-fade-in">
+      <h2 class="font-script text-3xl md:text-4xl text-charcoal">
+        Stay in Touch
+      </h2>
+      <p
+        class="mt-3 text-[11px] tracking-[0.18em] uppercase text-charcoal/60 leading-relaxed"
       >
-        <Symbol class="size-24 lg:size-48 text-white" />
-        <Text
-          tag="h1"
-          variant="display4XL"
-          class="font-display text-white uppercase mt-12"
+        Notes on new arrivals, shops, and seasonal chapters.
+      </p>
+      <form class="mt-8 flex flex-col sm:flex-row gap-3" action="#" method="post">
+        <label class="sr-only" for="footer-email">Email</label>
+        <input
+          id="footer-email"
+          type="email"
+          name="email"
+          required
+          placeholder="Email address"
+          class="flex-1 bg-transparent border border-charcoal/40 px-4 py-3 text-sm font-serif text-charcoal placeholder:text-charcoal/40 focus:border-charcoal focus:ring-0"
+        />
+        <button
+          type="submit"
+          class="tara-frame px-6 py-3 text-[11px] tracking-[0.22em] uppercase tara-hover-fade"
         >
-          {bride?.data.name.split(" ")[0] || "Bride"} & {
-            groom?.data.name.split(" ")[0] || "Groom"
-          }
-        </Text>
-      </div>
+          Subscribe
+        </button>
+      </form>
+    </div>
+
+    <div
+      class="mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 max-w-3xl mx-auto text-center sm:text-left"
+    >
+      {
+        columns.map((col) => (
+          <div>
+            <p class="text-[10px] tracking-[0.22em] uppercase text-charcoal/50 mb-4">
+              {col.title}
+            </p>
+            <ul class="flex flex-col gap-2.5">
+              {col.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-[12px] tracking-[0.14em] uppercase text-charcoal hover:opacity-60 transition-opacity"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 lg:mt-20 flex flex-col items-center gap-4">
+      <div class="w-16 h-px bg-charcoal/30"></div>
+      <Logo
+        class="text-xl tracking-[0.45em] font-display uppercase text-charcoal/80"
+      />
+      <p class="text-[10px] tracking-[0.2em] uppercase text-charcoal/40">
+        © {new Date().getFullYear()} Tara
+      </p>
     </div>
   </Wrapper>
-
 </footer>

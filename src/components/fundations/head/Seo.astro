@@ -1,31 +1,37 @@
 ---
 import { AstroSeo } from "@astrolib/seo";
+
+const {
+  title = "TARA | Official Site",
+  description = "Tara — refined clothing for everyday elegance. Dresses, knitwear, and finishing touches.",
+  canonical = "https://yourwebsite.com",
+} = Astro.props;
 ---
 
 <AstroSeo
-  title="Your Page Title"
-  description="A detailed description of your page content."
-  canonical="https://yourwebsite.com/current-page"
+  title={title}
+  description={description}
+  canonical={canonical}
   openGraph={{
-    url: "https://yourwebsite.com/current-page",
-    title: "Your Page Title",
-    description: "A detailed description of your page content.",
+    url: canonical,
+    title,
+    description,
     images: [
       {
         url: "https://yourwebsite.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Open Graph Image Alt",
+        alt: "TARA",
         type: "image/jpeg",
       },
     ],
-    site_name: "Your Site Name",
+    site_name: "TARA",
     type: "website",
     locale: "en_US",
   }}
   twitter={{
-    handle: "@yourhandle",
-    site: "@yourwebsite",
+    handle: "@tara",
+    site: "@tara",
     cardType: "summary_large_image",
   }}
 />

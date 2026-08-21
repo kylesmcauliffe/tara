@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import FramedButton from "./FramedButton.astro";
+
+interface Props {
+  city: string;
+  name: string;
+  address: string;
+  cityLine: string;
+  href: string;
+  image: ImageMetadata;
+  class?: string;
+}
+
+const {
+  city,
+  name,
+  address,
+  cityLine,
+  href,
+  image,
+  class: className = "",
+} = Astro.props;
+---
+
+<article class={`flex flex-col items-center text-center ${className}`.trim()}>
+  <a href={href} class="group block w-full overflow-hidden aspect-[4/5] mb-6">
+    <Image
+      src={image}
+      alt={`${name} — ${city}`}
+      class="size-full object-cover tara-img-zoom"
+      widths={[400, 640, 800]}
+      sizes="(max-width: 768px) 100vw, 33vw"
+      loading="lazy"
+    />
+  </a>
+  <h3 class="font-script text-3xl md:text-4xl text-charcoal">{city}</h3>
+  <p class="mt-3 text-[11px] tracking-[0.2em] uppercase text-charcoal/80">
+    {address}
+  </p>
+  <p class="mt-1 text-[11px] tracking-[0.2em] uppercase text-charcoal/80">
+    {cityLine}
+  </p>
+  <div class="mt-6">
+    <FramedButton href={href}>Store Details</FramedButton>
+  </div>
+</article>

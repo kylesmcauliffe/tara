@@ -1,225 +1,62 @@
 ---
-// Assets
-import { Image } from "astro:assets";
-import faq from "@/images/assets/faq.png";
-// Fundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
-// Fundations
-import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-const faqSections = [
+
+const faqs = [
   {
-    title: "Event Details",
-    items: [
-      {
-        question: "What time should we arrive for the ceremony?",
-        answer:
-          "Please arrive 10–15 minutes before the ceremony starts to find your seat.",
-      },
-      {
-        question: "Is there a dress code?",
-        answer: "Semi-formal. Think suits, dresses, and cocktail attire.",
-      },
-    ],
+    q: "How do I find my size?",
+    a: "Each product page includes Size & Fit notes. When in doubt, visit a shop or email us with your usual size and preferred fit.",
   },
   {
-    title: "Travel & Accommodation",
-    items: [
-      {
-        question: "Where should we stay?",
-        answer:
-          "We recommend the Hillside Hotel and Lakeview Inn, both within 10 minutes of the venue.",
-      },
-      {
-        question: "Is parking available at the venue?",
-        answer: "Yes, there is free parking available on-site for all guests.",
-      },
-    ],
+    q: "How long does shipping take?",
+    a: "US orders typically arrive within 3–7 business days. You’ll receive tracking once the package leaves our studio.",
   },
   {
-    title: "Gifts & Wishlist",
-    items: [
-      {
-        question: "Do you have a wishlist?",
-        answer:
-          "Yes, you'll find our wishlist on the dedicated page linked in the navigation.",
-      },
-      {
-        question: "Can we give a cash gift?",
-        answer:
-          "If you prefer, you're welcome to contribute to our honeymoon fund instead of a physical gift.",
-      },
-    ],
+    q: "Can I return an item?",
+    a: "Unworn pieces with tags may be returned within 14 days. See our Returns page for details.",
   },
   {
-    title: "Food & Dietary Requirements",
-    items: [
-      {
-        question: "What type of food will be served?",
-        answer:
-          "We'll be serving a three-course plated dinner with vegetarian and vegan options available.",
-      },
-      {
-        question: "How do I let you know about dietary restrictions?",
-        answer:
-          "Please include any dietary requirements in your RSVP or contact us directly.",
-      },
-      {
-        question: "Will there be an open bar?",
-        answer:
-          "Yes, we'll have beer, wine, and signature cocktails available throughout the reception.",
-      },
-    ],
+    q: "Do you ship internationally?",
+    a: "We currently ship within the United States. International shipping may return in a future season.",
   },
   {
-    title: "Children & Plus Ones",
-    items: [
-      {
-        question: "Are children invited?",
-        answer:
-          "We love your little ones, but we've planned an adults-only celebration to allow everyone to relax and enjoy the evening.",
-      },
-      {
-        question: "Can I bring a plus one?",
-        answer:
-          "Plus ones are indicated on your invitation. If you have questions about your invitation, please reach out to us.",
-      },
-    ],
-  },
-  {
-    title: "Photography & Social Media",
-    items: [
-      {
-        question: "Can we take photos during the ceremony?",
-        answer:
-          "We ask that you put away cameras and phones during the ceremony to be fully present. Our photographer will capture everything!",
-      },
-      {
-        question: "Is it okay to share photos on social media?",
-        answer:
-          "Absolutely! We'd love for you to share your photos. Please use our wedding hashtag #EmmaAndDaniel2024.",
-      },
-    ],
-  },
-  {
-    title: "Weather & Backup Plans",
-    items: [
-      {
-        question: "What happens if it rains?",
-        answer:
-          "Our venue has beautiful indoor spaces that can accommodate the entire celebration if needed.",
-      },
-      {
-        question: "Should I bring a jacket?",
-        answer:
-          "Evening temperatures can be cool, so we recommend bringing a light jacket or wrap.",
-      },
-    ],
+    q: "How do gift cards work?",
+    a: "Digital cards arrive by email; physical cards ship in a cream envelope. Both redeem online and in our shops.",
   },
 ];
 ---
 
 <BaseLayout>
-  <section>
-    <Wrapper variant="wide" class="pt-24 lg:pt-32">
-      <Image
-        src={faq}
-        alt="faq"
-        width="1440"
-        height="1193"
-        loading="eager"
-        decoding="async"
-        class="w-full max-h-100 object-cover object-center saturate-50"
-      />
-    </Wrapper>
-    <Wrapper variant="standard" class="py-24">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div>
-          <div class="lg:sticky lg:top-32 lg:text-balance">
-            <Text
-              tag="h2"
-              variant="displayLG"
-              class="text-base-900 font-serif font-light leading-snug tracking-tight"
-              >FAQ</Text
-            >
-            <Text tag="p" variant="textBase" class="text-base-600 mt-2"
-              >Answers to common questions about the day.</Text
-            >
-            <div class="mt-8 pt-8 border-t border-base-200">
-              <Text
-                tag="h3"
-                variant="textLG"
-                class="text-base-900 italic font-serif"
-              >
-                Still have questions?
-              </Text>
-              <div class="space-y-2 mt-4">
-                <Text tag="p" variant="textSM" class="text-base-600">
-                  <span class="font-medium text-base-900">Email:</span>
-                  <a
-                    href="mailto:hello@emmaanddaniel.com"
-                    class="text-base-700 hover:text-base-900 underline"
-                  >
-                    hello@emmaanddaniel.com
-                  </a>
-                </Text>
-                <Text tag="p" variant="textSM" class="text-base-600">
-                  <span class="font-medium text-base-900">Phone:</span> Emma
-                  <a
-                    href="tel:+15551234567"
-                    class="text-base-700 hover:text-base-900 underline"
-                  >
-                    (555) 123-4567
-                  </a>
-                </Text>
-                <Text tag="p" variant="textSM" class="text-base-600">
-                  <span class="font-medium text-base-900">Phone:</span> Daniel
-                  <a
-                    href="tel:+15557654321"
-                    class="text-base-700 hover:text-base-900 underline"
-                  >
-                    (555) 765-4321
-                  </a>
-                </Text>
-              </div>
-              <Text tag="p" variant="textSM" class="text-base-500 italic mt-8">
-                We're here to help make your experience wonderful!
-              </Text>
-            </div>
-          </div>
-        </div>
-        <div class="space-y-24 lg:col-span-2">
-          {
-            faqSections.map((section) => (
-              <section>
-                <Text
-                  tag="h2"
-                  variant="textXL"
-                  class="text-base-900 font-serif "
-                >
-                  {section.title}
-                </Text>
-                <div class="space-y-4 mt-4">
-                  {section.items.map((item) => (
-                    <div class="border-b border-base-200 pb-4">
-                      <Text
-                        tag="h3"
-                        variant="textLG"
-                        class="text-base-900 font-medium"
-                      >
-                        {item.question}
-                      </Text>
-                      <Text tag="p" variant="textBase" class="text-base-600 mt-2">
-                        {item.answer}
-                      </Text>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            ))
-          }
-        </div>
+  <section class="pt-14 pb-20 lg:pt-20 lg:pb-28">
+    <Wrapper variant="wide" class="max-w-2xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-[11px] tracking-[0.28em] uppercase text-charcoal/50">
+          Assistance
+        </p>
+        <h1 class="mt-3 font-script text-4xl md:text-5xl text-charcoal tara-fade-in">
+          FAQ
+        </h1>
       </div>
+      <dl class="space-y-8">
+        {
+          faqs.map((item) => (
+            <div class="border-b border-taupe pb-8">
+              <dt class="text-[12px] tracking-[0.16em] uppercase text-charcoal">
+                {item.q}
+              </dt>
+              <dd class="mt-3 text-base text-charcoal/70 leading-relaxed font-serif">
+                {item.a}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mt-12 text-center text-sm text-charcoal/60 font-serif">
+        Still need help?
+        <a href="/contact" class="underline underline-offset-4 hover:opacity-60"
+          >Contact us</a
+        >
+      </p>
     </Wrapper>
   </section>
 </BaseLayout>

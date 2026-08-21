@@ -1,26 +1,24 @@
 ---
-// Assets
 import { Image } from "astro:assets";
-import intro from "@/images/assets/intro.png";
-// Fundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { getTaraImage } from "@/data/images";
 ---
+
 <BaseLayout hideNavigation={true} hideFooter={true}>
   <section>
     <Wrapper variant="wide" class="py-8">
       <div class="relative overflow-hidden h-[calc(100dvh-4rem)]">
         <Image
-          src={intro}
-          alt="intro"
-          width="1440"
-          height="1193"
+          src={getTaraImage("collection-strip")}
+          alt="Tara"
+          widths={[800, 1280, 1920]}
+          sizes="100vw"
           loading="eager"
           decoding="async"
-          class="size-full object-cover object-top saturate-50"
+          class="size-full object-cover object-center saturate-50"
         />
-        <!-- Overlay with title and subtitle -->
         <div
           class="absolute inset-0 flex flex-col items-center text-center justify-center bg-black/30"
         >
@@ -34,18 +32,18 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
           <div class="mt-10 flex flex-col sm:flex-row gap-8 lg:gap-12">
             <a
               href="/"
-              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white ml-auto flex"
+              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white"
               >Home</a
             >
             <a
-              href="/events"
-              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white ml-auto flex"
-              >Events</a
+              href="/shop"
+              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white"
+              >Shop</a
             >
             <a
-              href="/people"
-              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white ml-auto flex"
-              >People</a
+              href="/collections"
+              class="text-4xl font-medium tracking-tight font-display uppercase focus:outline-none text-white"
+              >Collections</a
             >
           </div>
         </div>

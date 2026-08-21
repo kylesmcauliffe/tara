@@ -1,21 +1,19 @@
 ---
-// Fundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
 const pageSections = [
   {
     title: "Main Pages",
     columns: [
       {
-        category: "Static Pages",
+        category: "Storefront",
         links: [
           { text: "Home", href: "/" },
-          { text: "FAQ", href: "/faq" },
-          { text: "Info", href: "/info" },
+          { text: "Shop", href: "/shop" },
+          { text: "Collections", href: "/collections" },
           { text: "404", href: "/404" },
-          { text: "RSVP", href: "/rsvp" },
-          { text: "Locations", href: "/locations" },
         ],
       },
       {
@@ -25,49 +23,6 @@ const pageSections = [
           { text: "Links", href: "/system/link" },
           { text: "Buttons", href: "/system/buttons" },
           { text: "Typography", href: "/system/typography" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Content Collections",
-    columns: [
-      {
-        category: "Wishlist",
-        links: [
-          { text: "Home", href: "/wishlist/" },
-          { text: "Details", href: "/wishlist/cookware-set" },
-        ],
-      },
-      {
-        category: "People",
-        links: [
-          { text: "Home", href: "/people/" },
-          { text: "Details", href: "/people/bride" },
-        ],
-      },
-      {
-        category: "Gallery",
-        links: [
-          { text: "Home", href: "/gallery/" },
-          { text: "Details", href: "/gallery/reception" },
-        ],
-      },
-      {
-        category: "Events",
-        links: [
-          { text: "Home", href: "/events/" },
-          { text: "Details", href: "/events/ceremony" },
-        ],
-      },
-      {
-        category: "Journal",
-        links: [
-          { text: "Home", href: "/blog/" },
-          { text: "Details", href: "/blog/posts/1" },
-          { text: "Tag Index", href: "/blog/tags" },
-          { text: "Tag Category", href: "/blog/tags/wedding" },
-          { text: "RSS Feed", href: "/rss.xml" },
         ],
       },
     ],

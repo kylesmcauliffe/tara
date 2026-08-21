@@ -1,20 +1,93 @@
 ---
-// Fundations
+import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-// Sections
-import Intro from "@/components/landing/Intro.astro";
-import Hero from "@/components/landing/Hero.astro";
-import Story from "@/components/landing/Story.astro";
-import Schedule from "@/components/landing/Schedule.astro";
-import Actions from "@/components/landing/Actions.astro";
-import GalleryPreview from "@/components/landing/GalleryPreview.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import HeroSplit from "@/components/tara/HeroSplit.astro";
+import ProductCard from "@/components/tara/ProductCard.astro";
+import FramedButton from "@/components/tara/FramedButton.astro";
+import { products } from "@/data/tara";
+import { getTaraImage } from "@/data/images";
+
+const featured = products.slice(0, 3);
 ---
 
 <BaseLayout>
-  <Hero />
-  <Intro />
-  <Story />
-  <Schedule />
-  <Actions />
-  <GalleryPreview />
+  <HeroSplit
+    left={{
+      title: "Dresses",
+      href: "/shop/dresses",
+      image: getTaraImage("hero-dresses"),
+      cta: "Shop Dresses",
+    }}
+    right={{
+      title: "Knitwear",
+      href: "/shop/knitwear",
+      image: getTaraImage("hero-knitwear"),
+      cta: "Shop Knitwear",
+    }}
+  />
+
+  <section class="relative">
+    <a
+      href="/collections/fall-chapter-one"
+      class="group relative block overflow-hidden h-[42svh] md:h-[48svh]"
+    >
+      <Image
+        src={getTaraImage("collection-strip")}
+        alt="Fall Chapter One"
+        class="absolute inset-0 size-full object-cover tara-img-zoom"
+        widths={[800, 1280, 1920]}
+        sizes="100vw"
+        loading="lazy"
+      />
+      <div
+        class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500"
+      >
+      </div>
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 gap-4"
+      >
+        <p class="text-[11px] tracking-[0.28em] uppercase text-white/90">
+          Explore
+        </p>
+        <h2 class="font-script text-white text-4xl md:text-5xl lg:text-6xl">
+          Fall Chapter One
+        </h2>
+        <span
+          class="inline-flex items-center justify-center px-8 py-3 text-[11px] tracking-[0.22em] uppercase font-serif text-white border border-white/90 bg-white/10 group-hover:bg-white group-hover:text-charcoal transition-colors duration-300"
+        >
+          Shop the Collection
+        </span>
+      </div>
+    </a>
+  </section>
+
+  <section class="py-16 lg:py-24">
+    <Wrapper variant="wide">
+      <div class="text-center mb-12">
+        <p class="text-[11px] tracking-[0.28em] uppercase text-charcoal/50">
+          Featured
+        </p>
+        <h2 class="mt-2 font-script text-3xl md:text-4xl text-charcoal">
+          New Arrivals
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10">
+        {
+          featured.map((product) => (
+            <ProductCard
+              name={product.name}
+              subtitle={product.subtitle}
+              price={product.price}
+              href={`/products/${product.slug}`}
+              image={getTaraImage(product.imageKey)}
+            />
+          ))
+        }
+      </div>
+      <div class="mt-14 text-center">
+        <FramedButton href="/shop">Shop All</FramedButton>
+      </div>
+    </Wrapper>
+  </section>
 </BaseLayout>

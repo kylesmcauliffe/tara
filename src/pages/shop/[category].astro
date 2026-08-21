@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import ProductCard from "@/components/tara/ProductCard.astro";
+import {
+  shopCategories,
+  productsByCategory,
+  type ProductCategory,
+} from "@/data/tara";
+import { getTaraImage } from "@/data/images";
+
+export function getStaticPaths() {
+  return shopCategories.map((cat) => ({
+    params: { category: cat.slug },
+  }));
+}
+
+const { category } = Astro.params;
+const cat = shopCategories.find((c) => c.slug === category);
+if (!cat) {
+  return Astro.redirect("/shop");
+}
+
+const items = productsByCategory(cat.slug as ProductCategory);
+---
+
+<BaseLayout>
+  <section class="pt-12 pb-8 lg:pt-16">
+    <Wrapper variant="wide" class="text-center">
+      <p class="text-[11px] tracking-[0.28em] uppercase text-charcoal/50">
+        <a href="/shop" class="hover:opacity-60 transition-opacity">Shop</a>
+        <span class="mx-2">/</span>
+        {cat.label}
+      </p>
+      <h1 class="mt-3 font-script text-4xl md:text-5xl text-charcoal tara-fade-in">
+        {cat.label}
+      </h1>
+    </Wrapper>
+  </section>
+
+  <section class="pb-20 lg:pb-28">
+    <Wrapper variant="wide">
+      {
+        items.length === 0 ? (
+          <p class="text-center text-charcoal/60 font-serif">
+            Pieces for this category are arriving soon.
+          </p>
+        ) : (
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {items.map((product) => (
+              <ProductCard
+                name={product.name}
+                subtitle={product.subtitle}
+                price={product.price}
+                href={`/products/${product.slug}`}
+                image={getTaraImage(product.imageKey)}
+              />
+            ))}
+          </div>
+        )
+      }
+    </Wrapper>
+  </section>
+</BaseLayout>

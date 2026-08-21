@@ -1,5 +1,6 @@
 ---
-const { class: className = "", ...rest } = Astro.props;
+const { class: className = "", spaced = true, ...rest } = Astro.props;
+const label = spaced ? "T A R A" : "TARA";
 ---
 
-<span class={className} {...rest}>Northbound</span>
+<span class={className} {...rest}>{label}</span>

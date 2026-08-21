@@ -2,35 +2,130 @@
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 @plugin "tailwind-scrollbar-hide";
-@theme {
-  /* Typography */
-  --font-serif: "Noto Serif", serif;
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Noto Serif Display", serif;
-  /* Colors */
-  /* Accent */
-   --color-accent-50: oklch(0.961 0.036 134.97);
-  --color-accent-100: oklch(0.924 0.082 135.49);
-  --color-accent-200: oklch(0.845 0.092 134.54);
-  --color-accent-300: oklch(0.777 0.085 134.44);
-  --color-accent-400: oklch(0.699 0.076 134.75);
-  --color-accent-500: oklch(0.631 0.068 134.65);
-  --color-accent-600: oklch(0.554 0.06 134.52);
-  --color-accent-700: oklch(0.486 0.052 134.33);
-  --color-accent-800: oklch(0.41 0.045 134.57);
-  --color-accent-900: oklch(0.342 0.038 134.9);
-  --color-accent-950: oklch(0.305 0.033 134.79);
-  /* Base */
 
---color-base-50: oklch(0.958 0.005 94.95);
-  --color-base-100: oklch(0.913 0.011 89.67);
-  --color-base-200: oklch(0.827 0.012 89.69);
-  --color-base-300: oklch(0.741 0.012 89.71);
-  --color-base-400: oklch(0.654 0.009 84.55);
-  --color-base-500: oklch(0.569 0.009 91.5);
-  --color-base-600: oklch(0.482 0.007 84.55);
-  --color-base-700: oklch(0.398 0.007 95.17);
-  --color-base-800: oklch(0.309 0.004 84.54);
-  --color-base-900: oklch(0.223 0.002 67.71);
-  --color-base-950: oklch(0.177 0.002 106.5);
+@theme {
+  /* Typography — Cormorant Garamond */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Cormorant Garamond", Georgia, serif;
+
+  /* Tara palette */
+  --color-cream: #f7f4ee;
+  --color-charcoal: #1c1917;
+  --color-taupe: #e8e2d6;
+  --color-taupe-deep: #cfc6b6;
+
+  /* Map base scale to cream/charcoal for legacy utility classes */
+  --color-base-50: #f7f4ee;
+  --color-base-100: #f0ebe3;
+  --color-base-200: #e8e2d6;
+  --color-base-300: #d6cec0;
+  --color-base-400: #b8ae9c;
+  --color-base-500: #8a8174;
+  --color-base-600: #5c554c;
+  --color-base-700: #3d3832;
+  --color-base-800: #2a2623;
+  --color-base-900: #1c1917;
+  --color-base-950: #141211;
+
+  --color-accent-50: #f7f4ee;
+  --color-accent-100: #f0ebe3;
+  --color-accent-200: #e8e2d6;
+  --color-accent-300: #d6cec0;
+  --color-accent-400: #b8ae9c;
+  --color-accent-500: #8a8174;
+  --color-accent-600: #5c554c;
+  --color-accent-700: #3d3832;
+  --color-accent-800: #2a2623;
+  --color-accent-900: #1c1917;
+  --color-accent-950: #141211;
+}
+
+:root {
+  --tara-cream: #f7f4ee;
+  --tara-charcoal: #1c1917;
+  --tara-taupe: #e8e2d6;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Cormorant Garamond", Georgia, serif;
+}
+
+html {
+  color: var(--tara-charcoal);
+  background-color: var(--tara-cream);
+}
+
+body {
+  font-family: var(--font-serif);
+  color: var(--tara-charcoal);
+  background-color: var(--tara-cream);
+  /* Subtle parchment grain */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+.font-script {
+  font-family: var(--font-script);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+em.font-script,
+.font-script em {
+  font-style: italic;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Intentional motion */
+@keyframes tara-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tara-fade-in {
+  animation: tara-fade-in 0.8s ease-out both;
+}
+
+.tara-fade-in-delay {
+  animation: tara-fade-in 0.9s ease-out 0.15s both;
+}
+
+.tara-hover-fade {
+  transition: opacity 0.35s ease;
+}
+
+.tara-hover-fade:hover {
+  opacity: 0.72;
+}
+
+.tara-img-zoom {
+  transition: transform 0.7s ease, opacity 0.35s ease;
+}
+
+.group:hover .tara-img-zoom {
+  transform: scale(1.03);
+}
+
+/* Decorative double-frame for buttons */
+.tara-frame {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--tara-charcoal);
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4px var(--tara-charcoal);
+}
+
+.tara-frame-thin {
+  border: 1px solid var(--tara-charcoal);
+  box-shadow: inset 0 0 0 2px var(--tara-cream), inset 0 0 0 3px var(--tara-charcoal);
 }

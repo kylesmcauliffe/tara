@@ -1,0 +1,80 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import FramedButton from "@/components/tara/FramedButton.astro";
+---
+
+<BaseLayout>
+  <section class="pt-14 pb-20 lg:pt-20 lg:pb-28">
+    <Wrapper variant="wide" class="max-w-md mx-auto">
+      <div class="text-center mb-10">
+        <p class="text-[11px] tracking-[0.28em] uppercase text-charcoal/50">
+          Account
+        </p>
+        <h1 class="mt-3 font-script text-4xl md:text-5xl text-charcoal tara-fade-in">
+          Sign In
+        </h1>
+        <p class="mt-3 text-sm text-charcoal/65 font-serif">
+          Access orders, saved pieces, and shop preferences.
+        </p>
+      </div>
+
+      <form id="account-form" class="space-y-5" novalidate>
+        <div>
+          <label
+            for="account-email"
+            class="block text-[11px] tracking-[0.18em] uppercase text-charcoal/55 mb-2"
+          >
+            Email
+          </label>
+          <input
+            id="account-email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            class="w-full bg-transparent border border-charcoal/40 px-4 py-3 text-sm font-serif text-charcoal focus:border-charcoal focus:ring-0"
+          />
+        </div>
+        <div>
+          <label
+            for="account-password"
+            class="block text-[11px] tracking-[0.18em] uppercase text-charcoal/55 mb-2"
+          >
+            Password
+          </label>
+          <input
+            id="account-password"
+            name="password"
+            type="password"
+            required
+            autocomplete="current-password"
+            class="w-full bg-transparent border border-charcoal/40 px-4 py-3 text-sm font-serif text-charcoal focus:border-charcoal focus:ring-0"
+          />
+        </div>
+        <FramedButton type="submit" class="w-full">Sign In</FramedButton>
+        <p
+          id="account-note"
+          class="hidden text-center text-sm text-charcoal/60 font-serif"
+        >
+          Account sign-in will connect via Netlify Identity when enabled on
+          deploy. This form is a placeholder for now.
+        </p>
+      </form>
+
+      <p class="mt-8 text-center text-[11px] tracking-[0.16em] uppercase text-charcoal/50">
+        Need help?
+        <a href="/contact" class="underline underline-offset-4 hover:opacity-60"
+          >Contact us</a
+        >
+      </p>
+    </Wrapper>
+  </section>
+</BaseLayout>
+
+<script>
+  document.getElementById("account-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    document.getElementById("account-note")?.classList.remove("hidden");
+  });
+</script>

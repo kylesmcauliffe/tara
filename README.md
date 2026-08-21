@@ -1,28 +1,45 @@
-# Northbound
+# Tara
 
-![Theme preview](https://lexingtonthemes.com/OpenGraph/northbound/twitter.png)
+DÔEN-inspired fashion boutique for **Tara** — Astro site with shop, collections, PDP, shops, journal, gift cards, account/assistance flows, bag drawer, and Stripe Checkout.
 
+## Brand hubs
 
-## Links
-- **Theme specs:** https://lexingtonthemes.com/templates/northbound  
-- **Documentation:** https://lexingtonthemes.com/documentation  
-- **Changelog:** https://lexingtonthemes.com/changelog/northbound  
-- **Support:** https://lexingtonthemes.com/legal/support/  
-- **Get the bundle:** https://lexingtonthemes.com  
+- **Notion:** [Tara — Brand & Site Hub](https://app.notion.com/p/3c393b93b7b7815aa7d0e632d2b294f3)
+- **Figma:** [Tara — Fashion Boutique](https://www.figma.com/design/g6Wvrl22i5jwNU5J3ibT3J)
+- **Canva logo:** [edit](https://www.canva.com/d/a2WNoLZSdg6Mee_)
+- **Canva Instagram:** [edit](https://www.canva.com/d/e5cA0FWdyyPUdMR)
+- **Higgsfield prompts:** [`docs/higgsfield-prompts.md`](docs/higgsfield-prompts.md) (re-auth Higgsfield MCP, then regenerate into `src/images/tara/`)
 
 ## Requirements
+
 - Node.js 18 or 20 (LTS recommended)
 - npm
 
 ## Commands
 
-All commands are run from the root of the project, from a terminal:
+| Command | Action |
+| :------ | :----- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Astro local server |
+| `npx netlify dev` | Astro + Netlify functions (needed for Stripe checkout) |
+| `npm run build` | Build to `./dist/` |
+| `npm run preview` | Preview production build |
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Install dependencies                             |
-| `npm run dev`          | Start local dev server                           |
-| `npm run build`        | Build production site to `./dist/`               |
-| `npm run preview`     | Preview the production build locally             |
-| `npm run astro ...`    | Run Astro CLI commands                           |
-| `npm run astro --help` | Get help using the Astro CLI                     |
+## Environment variables
+
+Copy `.env.example` → `.env`:
+
+```bash
+STRIPE_SECRET_KEY=sk_test_...
+PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+```
+
+Checkout posts cart items to `/.netlify/functions/create-checkout`.
+
+## Routes
+
+`/`, `/shop`, `/shop/[category]`, `/collections`, `/collections/[slug]`, `/products/[slug]`, `/shops`, `/shops/[slug]`, `/journal`, `/gift-cards`, `/account`, `/assistance`, `/faq`, `/contact`, `/track-order`, `/returns`, `/checkout/success`, `/checkout/cancel`
+
+## Content
+
+Journal markdown: `src/content/journal/` · Catalog: `src/data/tara.ts` · Images: `src/images/tara/`

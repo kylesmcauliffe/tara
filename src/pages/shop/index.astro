@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import ProductCard from "@/components/tara/ProductCard.astro";
+import { products, shopCategories } from "@/data/tara";
+import { getTaraImage, type TaraImageKey } from "@/data/images";
+
+const categoryImages: Record<string, TaraImageKey> = {
+  dresses: "category-dresses",
+  knitwear: "category-knitwear",
+  tops: "category-tops",
+  bottoms: "category-dresses",
+  "finishing-touches": "category-tops",
+};
+
+const byCategory = shopCategories.map((cat) => ({
+  ...cat,
+  products: products.filter((p) => p.category === cat.slug),
+}));
+---
+
+<BaseLayout>
+  <section class="pt-10 pb-6 lg:pt-14">
+    <Wrapper variant="wide" class="text-center">
+      <p class="text-[11px] tracking-[0.28em] uppercase text-charcoal/50">Shop</p>
+      <h1 class="mt-2 font-script text-4xl md:text-5xl text-charcoal tara-fade-in">
+        Clothing
+      </h1>
+    </Wrapper>
+  </section>
+
+  <!-- Category grid -->
+  <section class="pb-16 lg:pb-20">
+    <Wrapper variant="wide">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {
+          shopCategories.map((cat) => (
+            <a
+              href={`/shop/${cat.slug}`}
+              class="group relative block overflow-hidden aspect-[4/5] tara-hover-fade"
+            >
+              <Image
+                src={getTaraImage(categoryImages[cat.slug] ?? "category-dresses")}
+                alt={cat.label}
+                class="absolute inset-0 size-full object-cover tara-img-zoom"
+                widths={[400, 640, 800]}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-400" />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="font-script text-white text-3xl md:text-4xl">
+                  {cat.label}
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- Product listings by category -->
+  {
+    byCategory.map(
+      (cat) =>
+        cat.products.length > 0 && (
+          <section id={cat.slug} class="scroll-mt-28 pb-16 lg:pb-20">
+            <Wrapper variant="wide">
+              <div class="text-center mb-10">
+                <h2 class="font-script text-3xl md:text-4xl text-charcoal">
+                  {cat.label}
+                </h2>
+              </div>
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                {cat.products.map((product) => (
+                  <ProductCard
+                    name={product.name}
+                    subtitle={product.subtitle}
+                    price={product.price}
+                    href={`/products/${product.slug}`}
+                    image={getTaraImage(product.imageKey)}
+                  />
+                ))}
+              </div>
+            </Wrapper>
+          </section>
+        ),
+    )
+  }
+</BaseLayout>
