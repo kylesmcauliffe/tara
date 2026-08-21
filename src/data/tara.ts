@@ -1,9 +1,22 @@
 /**
  * Tara catalog data.
- * Image keys map to files under src/images/tara/ (via data/images.ts).
+ * Image keys map to assets/tara via data/images.ts.
  */
 
-import type { TaraImageKey } from "./images";
+export type TaraImageKey =
+  | "hero-dresses"
+  | "hero-knitwear"
+  | "collection-strip"
+  | "product-marin"
+  | "product-darcy"
+  | "product-hardy"
+  | "product-julitta"
+  | "shop-la"
+  | "shop-marin"
+  | "shop-newport"
+  | "category-dresses"
+  | "category-knitwear"
+  | "category-tops";
 
 export const sizes = ["XXS", "XS", "S", "M", "L", "XL", "XXL"] as const;
 

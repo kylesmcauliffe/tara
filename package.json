@@ -1,27 +1,43 @@
 {
   "name": "tara",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
+  "main": "expo-router/entry",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "start": "expo start",
+    "dev": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "build": "expo export --platform web",
+    "lint": "expo lint"
   },
   "dependencies": {
-    "@astrojs/mdx": "^7.0.5",
-    "@astrojs/sitemap": "^3.7.3",
+    "@expo-google-fonts/cormorant-garamond": "^0.4.0",
+    "@expo/metro-runtime": "~57.0.12",
     "@netlify/functions": "^3.1.10",
-    "@tailwindcss/forms": "^0.5.11",
-    "@tailwindcss/typography": "^0.5.20",
-    "astro": "^7.2.2",
+    "expo": "^57.0.1",
+    "expo-constants": "~57.0.13",
+    "expo-font": "~57.0.1",
+    "expo-image": "~57.0.3",
+    "expo-linking": "~57.0.7",
+    "expo-router": "~57.0.2",
+    "expo-status-bar": "~57.0.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.0",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-web": "^0.21.2",
     "stripe": "^17.7.0",
-    "tailwind-scrollbar-hide": "^4.0.0"
+    "tailwindcss": "~4.1.16",
+    "uniwind": "~1.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "tailwindcss": "^4.3.3"
+    "@types/react": "~19.2.14",
+    "typescript": "~5.9.0"
   }
 }

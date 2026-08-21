@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "uniwind";
+
+@source "./components";
+@source "./lib";
+@source "../assets";
+
+@theme {
+  --color-cream: #f7f4ee;
+  --color-charcoal: #1c1917;
+  --color-taupe: #e8e2d6;
+  --color-taupe-deep: #cfc6b6;
+  --font-serif: "CormorantGaramond_400Regular", Georgia, serif;
+  --font-display: "CormorantGaramond_500Medium", Georgia, serif;
+}

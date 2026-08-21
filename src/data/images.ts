@@ -1,38 +1,22 @@
-import type { ImageMetadata } from "astro";
+import type { ImageSourcePropType } from "react-native";
+import type { TaraImageKey } from "./tara";
 
-import heroDresses from "@/images/tara/hero-dresses.png";
-import heroKnitwear from "@/images/tara/hero-knitwear.png";
-import collectionStrip from "@/images/tara/collection-strip.png";
-import productMarin from "@/images/tara/product-marin.png";
-import productDarcy from "@/images/tara/product-darcy.png";
-import productHardy from "@/images/tara/product-hardy.png";
-import productJulitta from "@/images/tara/product-julitta.png";
-import shopLa from "@/images/tara/shop-la.png";
-import shopMarin from "@/images/tara/shop-marin.png";
-import shopNewport from "@/images/tara/shop-newport.png";
-import categoryDresses from "@/images/tara/category-dresses.png";
-import categoryKnitwear from "@/images/tara/category-knitwear.png";
-import categoryTops from "@/images/tara/category-tops.png";
+export const taraImages: Record<TaraImageKey, ImageSourcePropType> = {
+  "hero-dresses": require("../../assets/tara/hero-dresses.png"),
+  "hero-knitwear": require("../../assets/tara/hero-knitwear.png"),
+  "collection-strip": require("../../assets/tara/collection-strip.png"),
+  "product-marin": require("../../assets/tara/product-marin.png"),
+  "product-darcy": require("../../assets/tara/product-darcy.png"),
+  "product-hardy": require("../../assets/tara/product-hardy.png"),
+  "product-julitta": require("../../assets/tara/product-julitta.png"),
+  "shop-la": require("../../assets/tara/shop-la.png"),
+  "shop-marin": require("../../assets/tara/shop-marin.png"),
+  "shop-newport": require("../../assets/tara/shop-newport.png"),
+  "category-dresses": require("../../assets/tara/category-dresses.png"),
+  "category-knitwear": require("../../assets/tara/category-knitwear.png"),
+  "category-tops": require("../../assets/tara/category-tops.png"),
+};
 
-/** Swap these for Higgsfield JPG/PNG assets when ready (same keys). */
-export const taraImages = {
-  "hero-dresses": heroDresses,
-  "hero-knitwear": heroKnitwear,
-  "collection-strip": collectionStrip,
-  "product-marin": productMarin,
-  "product-darcy": productDarcy,
-  "product-hardy": productHardy,
-  "product-julitta": productJulitta,
-  "shop-la": shopLa,
-  "shop-marin": shopMarin,
-  "shop-newport": shopNewport,
-  "category-dresses": categoryDresses,
-  "category-knitwear": categoryKnitwear,
-  "category-tops": categoryTops,
-} as const satisfies Record<string, ImageMetadata>;
-
-export type TaraImageKey = keyof typeof taraImages;
-
-export function getTaraImage(key: TaraImageKey): ImageMetadata {
+export function getTaraImage(key: TaraImageKey): ImageSourcePropType {
   return taraImages[key];
 }
