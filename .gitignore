@@ -45,3 +45,6 @@ app-example
 
 # Local Netlify folder
 .netlify
+
+# Design reference scrapes (never commit)
+reference/
