@@ -55,6 +55,22 @@ export default function HomeScreen() {
           ))}
         </View>
       </View>
+
+      <View className="px-4 md:px-8 pb-20">
+        <View className="max-w-5xl self-center w-full flex-row flex-wrap gap-3">
+          {(["portrait-joy", "portrait-smile", "portrait-veil"] as const).map(
+            (key) => (
+              <View key={key} className="flex-1 min-w-[180px] aspect-[3/4] overflow-hidden bg-taupe">
+                <Image
+                  source={getTaraImage(key)}
+                  style={{ width: "100%", height: "100%" }}
+                  contentFit="cover"
+                />
+              </View>
+            ),
+          )}
+        </View>
+      </View>
     </SiteShell>
   );
 }

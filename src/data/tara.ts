@@ -16,7 +16,10 @@ export type TaraImageKey =
   | "shop-newport"
   | "category-dresses"
   | "category-knitwear"
-  | "category-tops";
+  | "category-tops"
+  | "portrait-joy"
+  | "portrait-smile"
+  | "portrait-veil";
 
 export const sizes = ["XXS", "XS", "S", "M", "L", "XL", "XXL"] as const;
 
